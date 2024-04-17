@@ -10,13 +10,7 @@ const { isAdmin } = require("../middlewares/validateRole")
 
 const router = Router()
 router.post("/",crearClase)
-router.get("/",
-[
-    
-    isAdmin,
-    validateField
-]
-,getClases)
+router.get("/", getClases)
 router.put("/:id",
 [
  check("id","El id no es conrrecto").isMongoId(),
