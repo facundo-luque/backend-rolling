@@ -34,29 +34,11 @@ const creaClaseUsuario = async (req,res) =>{
 
 const getClasesUsuario = async (req, res) => {
 
-  let clasesUsuarios
-
-   const {role} = req.query
-   if (role === "USER") {
     const {usuario} = req.query
     const query = { disponible:true , usuario:usuario}
     
-     clasesUsuarios = await userModel.find(query)
-   }
-
-  if (
-        role === "ADMIN" ||
-        role === "SUPERADMIN"
-      ) {
-        clasesUsuarios = await userModel.find()
-      }
-
+    const clasesUsuarios = await userModel.find(query)
    
-    
-   
-  
-  
-    
     res.json({
       message: "Todas las clases usuarios",
       results: clasesUsuarios

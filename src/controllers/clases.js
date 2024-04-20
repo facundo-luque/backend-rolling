@@ -1,3 +1,4 @@
+const { string } = require("i/lib/util");
 const userModel = require("../models/clases");
 
 const crearClase = async (req, res) => {
@@ -37,19 +38,34 @@ const crearClase = async (req, res) => {
   
 const getClases = async (req, res) => {
 
- 
+    let query = null 
+
+   // const { limit, offset } = req.query;
+    const {role} = req.query
   
+    if (role === "USER"){
+        query = { disponible: true }
+     } 
+   
+ try {
 
-   const { limit, offset } = req.query;
-  const query = { disponible: true }
-
- 
- const clases = await userModel.find(query).limit(limit)/*.skip(offset)*/
+  const clases = await userModel.find(query)/*.limit(limit)*//*.skip(offset)*/
   
   res.json({
     message: "Todas las clases",
     results: clases
   });
+  
+ } catch (error) {
+  res.statusCode = 500;
+
+  res.json({
+    message: "INTERNAL SERVER ERROR",
+    error: error.message,
+  });
+ }
+   
+  
 };
   
 const modificarCupo = async (req,res) =>{
