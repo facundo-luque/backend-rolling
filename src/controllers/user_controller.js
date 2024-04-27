@@ -7,20 +7,29 @@ const userModel = require("../models/user");
 const getUsuario = async (req, res) => {
 
   const {pagina} = req.query 
-  
+  console.log("la pagina es: ",pagina)
  const opciones = {
-  page:pagina || 1,
+  page:pagina ,
   limit:5 
  }
 
   
   const allUsers = await userModel.paginate({}, opciones)
 
+  const dataPaginate = {
+      totalDocs:allUsers.totalDocs,
+      page: allUsers.page,
+      prevPage : allUsers.prevPage,
+      nextPage: allUsers.nextPage
+  }
+
+  
+
  
   res.json({
     message: "All Users",
     results: allUsers.docs,
-    limit: allUsers.limit
+    paginacion: dataPaginate
   });
 };
 
