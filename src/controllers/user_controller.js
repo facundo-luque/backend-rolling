@@ -6,15 +6,21 @@ const userModel = require("../models/user");
 
 const getUsuario = async (req, res) => {
 
+  const {pagina} = req.query 
+  
+ const opciones = {
+  page:pagina || 1,
+  limit:5 
+ }
+
+  
+  const allUsers = await userModel.paginate({}, opciones)
+
  
-
-  const query = {  status: true };
-  const allUsers = await userModel.find(query)
-
-
   res.json({
     message: "All Users",
-    results: allUsers
+    results: allUsers.docs,
+    limit: allUsers.limit
   });
 };
 
@@ -23,6 +29,10 @@ const postUsuario = async (req, res) => {
 
   try {
     const { body } = req;
+
+    delete body.cpassword
+
+   
 
      if (body.planContratado) {
       const planMin = body.planContratado.toLowerCase()

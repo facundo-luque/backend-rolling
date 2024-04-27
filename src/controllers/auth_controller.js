@@ -63,6 +63,7 @@ res.json({
 
 const validaLogin = async (req, res) => {
   const { email, password } = req.query;
+  console.log("prueba domingo login")
   try {
   
 
