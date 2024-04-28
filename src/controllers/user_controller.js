@@ -20,10 +20,11 @@ const getUsuario = async (req, res) => {
       totalDocs:allUsers.totalDocs,
       page: allUsers.page,
       prevPage : allUsers.prevPage,
-      nextPage: allUsers.nextPage
+      nextPage: allUsers.nextPage,
+      totalPages: allUsers.totalPages
   }
 
-  
+  console.log("paginacion ", dataPaginate)
 
  
   res.json({
