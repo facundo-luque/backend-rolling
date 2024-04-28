@@ -18,10 +18,10 @@ const getUsuario = async (req, res) => {
 
   const dataPaginate = {
       totalDocs:allUsers.totalDocs,
-      page: allUsers.page,
-      prevPage : allUsers.prevPage,
-      nextPage: allUsers.nextPage,
-      totalPages: allUsers.totalPages
+      page:allUsers.page,
+      prevPage:allUsers.prevPage,
+      nextPage:allUsers.nextPage,
+      totalPages:allUsers.totalPages
   }
 
   console.log("paginacion ", dataPaginate)
