@@ -9,7 +9,7 @@ const getUsuario = async (req, res) => {
   const {pagina} = req.query 
   console.log("la pagina es: ",pagina)
  const opciones = {
-  page:pagina ,
+  page:pagina || 1 ,
   limit:5 
  }
 
