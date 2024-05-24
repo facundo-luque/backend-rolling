@@ -1,9 +1,12 @@
 const {Schema, model} = require("mongoose")
 
 const userSchema = Schema({
+    
     id_clase:{
         type:String
     },
+    
+   
     nombre:{
         type: String,
         required: true

@@ -1,4 +1,4 @@
-const { string } = require("i/lib/util");
+
 const userModel = require("../models/clases");
 
 const crearClase = async (req, res) => {
@@ -37,25 +37,42 @@ const crearClase = async (req, res) => {
 
   
 const getClases = async (req, res) => {
+  let query = null 
+  const {pagina, role} = req.query 
 
-    let query = null 
+  /* paginacion */
+  console.log("la pagina es: ",pagina)
+  const opciones = {
+  page:pagina || 1 ,
+  limit:6
+ }
 
-   // const { limit, offset } = req.query;
-    const {role} = req.query
-  
+/* Si es usuario solo muestra clases disponibles */
     if (role === "USER"){
         query = { disponible: true }
      } 
    
  try {
 
-  const clases = await userModel.find(query)/*.limit(limit)*//*.skip(offset)*/
-  
-  res.json({
-    message: "Todas las clases",
-    results: clases
-  });
-  
+  const clases = await userModel.paginate(query, opciones)
+
+  const dataPaginate = {
+    totalDocs:clases.totalDocs,
+    page:clases.page,
+    prevPage:clases.prevPage,
+    nextPage:clases.nextPage,
+    totalPages:clases.totalPages
+}
+
+console.log("paginacion ", dataPaginate)
+
+
+res.json({
+  message: "todas las clases",
+  results: clases.docs,
+  paginacion: dataPaginate
+});
+
  } catch (error) {
   res.statusCode = 500;
 
@@ -84,12 +101,11 @@ if (restbody.nombre){
   restbody.nombre =nomMin
 }
 
- if (cupos_disponibles){
-  
+ if (cupos_disponibles || cupos_disponibles=== 0 ){
+ 
   nuevoCupo = await userModel.findByIdAndUpdate(id,{ cupos_disponibles:cupos_disponibles, ...restbody },{ new: true,})
 }
  else  {
-
   nuevoCupo = await userModel.findByIdAndUpdate(id,{ ...restbody },{ new: true,})
 }
 
