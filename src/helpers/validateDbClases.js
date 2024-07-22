@@ -28,15 +28,5 @@ const validaHora = async (id) => {
 };
 
 
-const validaCupos = async (id)=>{
-    
-    const clases = await userModel.findById(id)
-    const cupos = clases.cupos
-    const cupos_disponibles= clases.cupos_disponibles
 
-    if (cupos_disponibles > cupos){
-        throw new Error("La cantidad de cupos disponibles no puede ser mayor a la cantidad de cupos otorgados");
-    }
-    return
-}
-module.exports = { validaHora,validaCupos,validaId };
+module.exports = { validaHora,validaId };

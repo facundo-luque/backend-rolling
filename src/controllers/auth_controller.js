@@ -63,7 +63,7 @@ res.json({
 
 const validaLogin = async (req, res) => {
   const { email, password } = req.query;
-  console.log("prueba domingo login")
+  console.log(`-----------El email es ${email} las pass es ${password}----`)
   try {
   
 
@@ -72,9 +72,9 @@ const validaLogin = async (req, res) => {
 
     console.log("el user login es: ", userLogin);
 
-    const validPassword = bcrypt.compareSync(password ,userLogin.password  );
+     const validPassword = bcrypt.compareSync(password ,userLogin.password  );
 
-    console.log("el valid pas:",validPassword);
+  
 
      if (!validPassword) {
     return res.status(400).json({

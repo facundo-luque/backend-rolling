@@ -87,7 +87,7 @@ const postUsuario = async (req, res) => {
 };
 
 const puttUsuario = async (req, res) => {
-
+console.log("el body es: ", req.body)
   try {
     
     const { id } = req.params;
@@ -116,7 +116,6 @@ const puttUsuario = async (req, res) => {
        newUser = await userModel.findByIdAndUpdate(id, {password: hashPassword,...restBody}, { new: true,});
   
     } else {
-      console.log("llegue hasta aqui en el put de usuarios")
        newUser = await userModel.findByIdAndUpdate(id, {...restBody}, {new: true,});
     }
   
@@ -127,6 +126,7 @@ const puttUsuario = async (req, res) => {
       
   } catch (error) {
     res.statusCode = 500;
+    console.error("el error es: ",error.message)
 
     res.json({
       message: "INTERNAL SERVER ERROR",

@@ -15,7 +15,7 @@ router.put("/:id",
 [
  check("id","El id no es conrrecto").isMongoId(),
  check("id").custom(validaId),
- check("id").custom(validaCupos),
+ //check("id").custom(validaCupos),
 
  validateField
 ],

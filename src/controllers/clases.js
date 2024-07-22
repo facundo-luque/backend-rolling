@@ -86,6 +86,7 @@ res.json({
 };
   
 const modificarCupo = async (req,res) =>{
+
 try {
   const {id} = req.params
 
